@@ -84,6 +84,8 @@
                 alert('登录失败');
                 return '后端错误';
             }
+        }).then(user => {
+            console.log(user.data);
         });
     }
 

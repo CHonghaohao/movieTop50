@@ -3,7 +3,9 @@ package com.example.demo.Controller;
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.Dao.*;
 import com.example.demo.Entity.Top;
+import com.example.demo.Service.TopService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -26,15 +28,22 @@ import java.util.Map;
 public class allmovieController {
     @Autowired
     private TopDao topDao;
+    @Autowired
+    private TopService topService;
 
     @RequestMapping("/selectAll")
     @ResponseBody
-    public Map<String ,Object> selectAll(){
+    /*public Map<String ,Object> selectAll(){
         Map<String, Object> modelMap = new HashMap<String, Object>();
         System.out.println(topDao.selectAll());
         List<Top> topall = topDao.selectAll();
         modelMap.put("data",topall);
         return modelMap;
+    }*/
+    public Page<Top> findAll(@RequestParam("page") int page, @RequestParam("page-size") int pageSize) {
+        page = page < 0 ? 0 : page;
+        pageSize = pageSize < 1 ? 1 : pageSize;
+        return this.topService.findAll(page, pageSize);
     }
     @RequestMapping("/selectId")
     @ResponseBody

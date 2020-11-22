@@ -2,7 +2,9 @@ package com.example.demo.Dao;
 
 import com.example.demo.Entity.User;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Service;
 
+@Service
 public interface UserDao {
     int deleteByPrimaryKey(Integer id);
 
