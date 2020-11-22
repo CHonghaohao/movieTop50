@@ -1,127 +1,133 @@
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.Dao.TopDao">
-
-    <resultMap id="BaseResultMap" type="com.example.demo.Entity.Top">
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="movie_name" jdbcType="VARCHAR" property="movieName"/>
-        <result column="movie_othername" jdbcType="VARCHAR" property="movieOthername"/>
-        <result column="movie_intro" jdbcType="VARCHAR" property="movieIntro"/>
-        <result column="movie_type" jdbcType="VARCHAR" property="movieType"/>
-        <result column="movie_grade" jdbcType="VARCHAR" property="movieGrade"/>
-        <result column="movie_gradenum" jdbcType="VARCHAR" property="movieGradenum"/>
-        <result column="movie_evaluate" jdbcType="VARCHAR" property="movieEvaluate"/>
-    </resultMap>
-    <sql id="Base_Column_List">
-        id, movie_name, movie_othername, movie_intro, movie_type, movie_grade, movie_gradenum,
-        movie_evaluate
-    </sql>
+  <resultMap id="BaseResultMap" type="com.example.demo.Entity.Top">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="movie_name" jdbcType="VARCHAR" property="movieName" />
+    <result column="movie_director" jdbcType="VARCHAR" property="movieDirector" />
+    <result column="movie_actor" jdbcType="VARCHAR" property="movieActor" />
+    <result column="movie_year" jdbcType="VARCHAR" property="movieYear" />
+    <result column="movie_type" jdbcType="VARCHAR" property="movieType" />
+    <result column="movie_grade" jdbcType="VARCHAR" property="movieGrade" />
+    <result column="movie_gradenum" jdbcType="VARCHAR" property="movieGradenum" />
+    <result column="movie_evaluate" jdbcType="VARCHAR" property="movieEvaluate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, movie_name, movie_director, movie_actor, movie_year, movie_type, movie_grade, 
+    movie_gradenum, movie_evaluate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from top
+    where id = #{id,jdbcType=INTEGER}
+  </select>
     <select id="selectAll" resultMap="BaseResultMap">
-            SELECT * FROM  top
-    </select>
-    <select id="selectId" resultMap="BaseResultMap">
-            SELECT * FROM  top where id = #{id}
-    </select>
-
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from top
-        where id = #{id,jdbcType=INTEGER}
+      select * from top
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from top
-        where id = #{id,jdbcType=INTEGER}
-    </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.demo.Entity.Top" useGeneratedKeys="true">
-    insert into top (movie_name, movie_othername, movie_intro,
-      movie_type, movie_grade, movie_gradenum,
-      movie_evaluate)
-    values (#{movieName,jdbcType=VARCHAR}, #{movieOthername,jdbcType=VARCHAR}, #{movieIntro,jdbcType=VARCHAR},
-      #{movieType,jdbcType=VARCHAR}, #{movieGrade,jdbcType=VARCHAR}, #{movieGradenum,jdbcType=VARCHAR},
-      #{movieEvaluate,jdbcType=VARCHAR})
-    </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.demo.Entity.Top" useGeneratedKeys="true">
-        insert into top
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="movieName != null">
-                movie_name,
-            </if>
-            <if test="movieOthername != null">
-                movie_othername,
-            </if>
-            <if test="movieIntro != null">
-                movie_intro,
-            </if>
-            <if test="movieType != null">
-                movie_type,
-            </if>
-            <if test="movieGrade != null">
-                movie_grade,
-            </if>
-            <if test="movieGradenum != null">
-                movie_gradenum,
-            </if>
-            <if test="movieEvaluate != null">
-                movie_evaluate,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="movieName != null">
-                #{movieName,jdbcType=VARCHAR},
-            </if>
-            <if test="movieOthername != null">
-                #{movieOthername,jdbcType=VARCHAR},
-            </if>
-            <if test="movieIntro != null">
-                #{movieIntro,jdbcType=VARCHAR},
-            </if>
-            <if test="movieType != null">
-                #{movieType,jdbcType=VARCHAR},
-            </if>
-            <if test="movieGrade != null">
-                #{movieGrade,jdbcType=VARCHAR},
-            </if>
-            <if test="movieGradenum != null">
-                #{movieGradenum,jdbcType=VARCHAR},
-            </if>
-            <if test="movieEvaluate != null">
-                #{movieEvaluate,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.Entity.Top">
-        update top
-        <set>
-            <if test="movieName != null">
-                movie_name = #{movieName,jdbcType=VARCHAR},
-            </if>
-            <if test="movieOthername != null">
-                movie_othername = #{movieOthername,jdbcType=VARCHAR},
-            </if>
-            <if test="movieIntro != null">
-                movie_intro = #{movieIntro,jdbcType=VARCHAR},
-            </if>
-            <if test="movieType != null">
-                movie_type = #{movieType,jdbcType=VARCHAR},
-            </if>
-            <if test="movieGrade != null">
-                movie_grade = #{movieGrade,jdbcType=VARCHAR},
-            </if>
-            <if test="movieGradenum != null">
-                movie_gradenum = #{movieGradenum,jdbcType=VARCHAR},
-            </if>
-            <if test="movieEvaluate != null">
-                movie_evaluate = #{movieEvaluate,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.example.demo.Entity.Top">
+    delete from top
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.demo.Entity.Top" useGeneratedKeys="true">
+    insert into top (movie_name, movie_director, movie_actor, 
+      movie_year, movie_type, movie_grade, 
+      movie_gradenum, movie_evaluate)
+    values (#{movieName,jdbcType=VARCHAR}, #{movieDirector,jdbcType=VARCHAR}, #{movieActor,jdbcType=VARCHAR}, 
+      #{movieYear,jdbcType=VARCHAR}, #{movieType,jdbcType=VARCHAR}, #{movieGrade,jdbcType=VARCHAR}, 
+      #{movieGradenum,jdbcType=VARCHAR}, #{movieEvaluate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.demo.Entity.Top" useGeneratedKeys="true">
+    insert into top
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="movieName != null">
+        movie_name,
+      </if>
+      <if test="movieDirector != null">
+        movie_director,
+      </if>
+      <if test="movieActor != null">
+        movie_actor,
+      </if>
+      <if test="movieYear != null">
+        movie_year,
+      </if>
+      <if test="movieType != null">
+        movie_type,
+      </if>
+      <if test="movieGrade != null">
+        movie_grade,
+      </if>
+      <if test="movieGradenum != null">
+        movie_gradenum,
+      </if>
+      <if test="movieEvaluate != null">
+        movie_evaluate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="movieName != null">
+        #{movieName,jdbcType=VARCHAR},
+      </if>
+      <if test="movieDirector != null">
+        #{movieDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="movieActor != null">
+        #{movieActor,jdbcType=VARCHAR},
+      </if>
+      <if test="movieYear != null">
+        #{movieYear,jdbcType=VARCHAR},
+      </if>
+      <if test="movieType != null">
+        #{movieType,jdbcType=VARCHAR},
+      </if>
+      <if test="movieGrade != null">
+        #{movieGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="movieGradenum != null">
+        #{movieGradenum,jdbcType=VARCHAR},
+      </if>
+      <if test="movieEvaluate != null">
+        #{movieEvaluate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.Entity.Top">
+    update top
+    <set>
+      <if test="movieName != null">
+        movie_name = #{movieName,jdbcType=VARCHAR},
+      </if>
+      <if test="movieDirector != null">
+        movie_director = #{movieDirector,jdbcType=VARCHAR},
+      </if>
+      <if test="movieActor != null">
+        movie_actor = #{movieActor,jdbcType=VARCHAR},
+      </if>
+      <if test="movieYear != null">
+        movie_year = #{movieYear,jdbcType=VARCHAR},
+      </if>
+      <if test="movieType != null">
+        movie_type = #{movieType,jdbcType=VARCHAR},
+      </if>
+      <if test="movieGrade != null">
+        movie_grade = #{movieGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="movieGradenum != null">
+        movie_gradenum = #{movieGradenum,jdbcType=VARCHAR},
+      </if>
+      <if test="movieEvaluate != null">
+        movie_evaluate = #{movieEvaluate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.Entity.Top">
     update top
     set movie_name = #{movieName,jdbcType=VARCHAR},
-      movie_othername = #{movieOthername,jdbcType=VARCHAR},
-      movie_intro = #{movieIntro,jdbcType=VARCHAR},
+      movie_director = #{movieDirector,jdbcType=VARCHAR},
+      movie_actor = #{movieActor,jdbcType=VARCHAR},
+      movie_year = #{movieYear,jdbcType=VARCHAR},
       movie_type = #{movieType,jdbcType=VARCHAR},
       movie_grade = #{movieGrade,jdbcType=VARCHAR},
       movie_gradenum = #{movieGradenum,jdbcType=VARCHAR},

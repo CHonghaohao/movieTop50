@@ -2,20 +2,26 @@ package com.example.demo.Entity;
 
 import java.io.Serializable;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * top
  * @author 
  */
 @Data
+@Getter
+@Setter
 public class Top implements Serializable {
     private Integer id;
 
     private String movieName;
 
-    private String movieOthername;
+    private String movieDirector;
 
-    private String movieIntro;
+    private String movieActor;
+
+    private String movieYear;
 
     private String movieType;
 
