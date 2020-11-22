@@ -12,6 +12,7 @@
 </head>
 <body>
 <button onclick="chuan()">点我</button>
+<button onclick="login()">登录</button>
 <script src="jquery-3.5.1.min.js"></script>
 <script>
     var movie =
@@ -25,6 +26,14 @@
                 "movieGrade": "9.7",
                 "movieGradenum": "2180339",
                 "movieEvaluate": "希望让人自由"
+            }
+        };
+    var user =
+        {
+            "data": {
+                "id": 1,
+                "username": "admin",
+                "password": "123456",
             }
         };
 
@@ -56,6 +65,26 @@
                 console.log(data);
             }
         });*/
+    }
+    function login() {
+        const url = "http://localhost:9999/user/login";
+        return fetch(url, {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user.data),
+        }).then((res) => {
+            if (res.ok) {
+                alert('登录成功');
+                console.log(res.json());
+                return res;
+            } else {
+                alert('登录失败');
+                return '后端错误';
+            }
+        });
     }
 
 
