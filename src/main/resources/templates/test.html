@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 
+    @Description：
+    @Author：CHonghao
+    @Date:2020/11/19 11:32
+    @Version：V1.0
+    -->
+</head>
+<body>
+<button onclick="chuan()">点我</button>
+<script src="jquery-3.5.1.min.js"></script>
+<script>
+    var movie =
+        {
+            "data": {
+                "id": 1,
+                "movieName": "程宏豪",
+                "movieOthername": "  The Shawshank Redemption",
+                "movieIntro": "导演: 弗兰克·德拉邦特 Frank Darabont   主演: 蒂姆·罗宾斯 Tim  ",
+                "movieType": "1994   美国   犯罪 剧情",
+                "movieGrade": "9.7",
+                "movieGradenum": "2180339",
+                "movieEvaluate": "希望让人自由"
+            }
+        };
+
+
+    function chuan() {
+        const url = "http://localhost:9999/movie/update";
+        return fetch(url, {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(movie.data),
+        }).then((res) => {
+            if (res.ok) {
+                alert('保存成功');
+                return res;
+            } else {
+                alert('保存失败');
+                return '后端错误';
+            }
+        });
+        /*$.ajax({
+            url: url,
+            type: "POST",
+            data: movie.data,  //传入组装的参数
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+            }
+        });*/
+    }
+
+
+</script>
+
+</body>
+</html>
