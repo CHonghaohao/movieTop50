@@ -6,6 +6,9 @@ import com.example.demo.Entity.Top;
 import com.example.demo.Service.TopService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -43,7 +46,17 @@ public class allmovieController {
     public Page<Top> findAll(@RequestParam("page") int page, @RequestParam("page-size") int pageSize) {
         page = page < 0 ? 0 : page;
         pageSize = pageSize < 1 ? 1 : pageSize;
+
         return this.topService.findAll(page, pageSize);
+    }
+    @RequestMapping("/selectAlldaoxu")
+    @ResponseBody
+    public Page<Top> findAlldaosu(@RequestParam("page") int page, @RequestParam("page-size") int pageSize) {
+        page = page < 0 ? 0 : page;
+        pageSize = pageSize < 1 ? 1 : pageSize;
+        Sort sort = Sort.by(Sort.Direction.DESC,"id");
+        Pageable pageable = PageRequest.of(page , pageSize,sort);
+        return this.topService.findAlldaoxu(pageable);
     }
     @RequestMapping("/selectId")
     @ResponseBody

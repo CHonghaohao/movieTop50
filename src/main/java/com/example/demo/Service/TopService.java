@@ -27,4 +27,7 @@ public class TopService {
         Pageable pageable = PageRequest.of(page, size);
         return this.topRepository.findAll(pageable);
     }
+    public Page<Top> findAlldaoxu(Pageable pageable) {
+        return this.topRepository.findAll(pageable);
+    }
 }
