@@ -75,17 +75,17 @@
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(user.data),
-        }).then((res) => {
+        }).then(res => {
             if (res.ok) {
                 alert('登录成功');
-                console.log(res.json());
-                return res;
+                // console.log(res.json());
+                return res.json();
             } else {
                 alert('登录失败');
                 return '后端错误';
             }
-        }).then(user => {
-            console.log(user.data);
+        }).then(resuser => {
+            console.log(resuser.userName);
         });
     }
 
