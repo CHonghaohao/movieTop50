@@ -11,31 +11,34 @@
     <result column="movie_grade" jdbcType="VARCHAR" property="movieGrade" />
     <result column="movie_gradenum" jdbcType="VARCHAR" property="movieGradenum" />
     <result column="movie_evaluate" jdbcType="VARCHAR" property="movieEvaluate" />
+    <result column="movie_img" jdbcType="VARCHAR" property="movieImg" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, movie_name, movie_director, movie_actor, movie_year, movie_type, movie_grade, 
-    movie_gradenum, movie_evaluate
+    id, movie_name, movie_director, movie_actor, movie_year, movie_type, movie_grade,
+    movie_gradenum, movie_evaluate, movie_img
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from top
     where id = #{id,jdbcType=INTEGER}
   </select>
-    <select id="selectAll" resultMap="BaseResultMap">
+  <select id="selectAll" resultMap="BaseResultMap">
       select * from top
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from top
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.demo.Entity.Top" useGeneratedKeys="true">
-    insert into top (movie_name, movie_director, movie_actor, 
-      movie_year, movie_type, movie_grade, 
-      movie_gradenum, movie_evaluate)
-    values (#{movieName,jdbcType=VARCHAR}, #{movieDirector,jdbcType=VARCHAR}, #{movieActor,jdbcType=VARCHAR}, 
-      #{movieYear,jdbcType=VARCHAR}, #{movieType,jdbcType=VARCHAR}, #{movieGrade,jdbcType=VARCHAR}, 
-      #{movieGradenum,jdbcType=VARCHAR}, #{movieEvaluate,jdbcType=VARCHAR})
+    insert into top (movie_name, movie_director, movie_actor,
+      movie_year, movie_type, movie_grade,
+      movie_gradenum, movie_evaluate, movie_img
+      )
+    values (#{movieName,jdbcType=VARCHAR}, #{movieDirector,jdbcType=VARCHAR}, #{movieActor,jdbcType=VARCHAR},
+      #{movieYear,jdbcType=VARCHAR}, #{movieType,jdbcType=VARCHAR}, #{movieGrade,jdbcType=VARCHAR},
+      #{movieGradenum,jdbcType=VARCHAR}, #{movieEvaluate,jdbcType=VARCHAR}, #{movieImg,jdbcType=VARCHAR}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.demo.Entity.Top" useGeneratedKeys="true">
     insert into top
@@ -64,6 +67,9 @@
       <if test="movieEvaluate != null">
         movie_evaluate,
       </if>
+      <if test="movieImg != null">
+        movie_img,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="movieName != null">
@@ -89,6 +95,9 @@
       </if>
       <if test="movieEvaluate != null">
         #{movieEvaluate,jdbcType=VARCHAR},
+      </if>
+      <if test="movieImg != null">
+        #{movieImg,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -119,6 +128,9 @@
       <if test="movieEvaluate != null">
         movie_evaluate = #{movieEvaluate,jdbcType=VARCHAR},
       </if>
+      <if test="movieImg != null">
+        movie_img = #{movieImg,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -131,7 +143,8 @@
       movie_type = #{movieType,jdbcType=VARCHAR},
       movie_grade = #{movieGrade,jdbcType=VARCHAR},
       movie_gradenum = #{movieGradenum,jdbcType=VARCHAR},
-      movie_evaluate = #{movieEvaluate,jdbcType=VARCHAR}
+      movie_evaluate = #{movieEvaluate,jdbcType=VARCHAR},
+      movie_img = #{movieImg,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

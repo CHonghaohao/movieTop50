@@ -4,6 +4,7 @@ import java.io.Serializable;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -16,6 +17,7 @@ import javax.persistence.Id;
 @Getter
 @Setter
 public class Top implements Serializable {
+
     @Id
     private Integer id;
 
@@ -34,6 +36,8 @@ public class Top implements Serializable {
     private String movieGradenum;
 
     private String movieEvaluate;
+
+    private String movieImg;
 
     private static final long serialVersionUID = 1L;
 }
