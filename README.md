@@ -1,6 +1,6 @@
 # 接口信息
 
-查询所有记录：http://localhost:9999/movie/selectAll
+查询所有记录：http://localhost:9999/movie/selectAll?page=1&page-size=5
 
 查询某个Id：http://localhost:9999/movie/selectId?id=1
 
