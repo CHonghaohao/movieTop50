@@ -101,6 +101,16 @@
       </if>
     </trim>
   </insert>
+  <insert id="insertmovie" parameterType="com.example.demo.Entity.Top">
+    insert into top (id, movie_name, movie_director, movie_actor,
+      movie_year, movie_type, movie_grade,
+      movie_gradenum, movie_evaluate, movie_img
+      )
+    values (#{id,jdbcType=INTEGER},#{movieName,jdbcType=VARCHAR}, #{movieDirector,jdbcType=VARCHAR}, #{movieActor,jdbcType=VARCHAR},
+      #{movieYear,jdbcType=VARCHAR}, #{movieType,jdbcType=VARCHAR}, #{movieGrade,jdbcType=VARCHAR},
+      #{movieGradenum,jdbcType=VARCHAR}, #{movieEvaluate,jdbcType=VARCHAR}, #{movieImg,jdbcType=VARCHAR}
+      )
+  </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.Entity.Top">
     update top
     <set>
@@ -147,4 +157,7 @@
       movie_img = #{movieImg,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <update id="idTofront" parameterType="java.lang.Integer">
+        update top set id = id - 1 where id > #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

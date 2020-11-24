@@ -19,4 +19,8 @@ public interface TopDao {
     int updateByPrimaryKey(Top record);
 
     List<Top> selectAll();
+
+    void idTofront(Integer id);
+
+    int insertmovie(Top top);
 }

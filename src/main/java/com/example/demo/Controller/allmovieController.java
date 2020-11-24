@@ -70,6 +70,7 @@ public class allmovieController {
     public int deleteMovie(int id){
         // 删除成功返回1，删除失败返回0
         int rt = topDao.deleteByPrimaryKey(id);
+        topDao.idTofront(id);
         return rt;
     }
 
@@ -78,6 +79,13 @@ public class allmovieController {
     public int updateMovie(@RequestBody Top top){
         System.out.println(top);
         int rt = topDao.updateByPrimaryKey(top);
+        return rt;
+    }
+    @RequestMapping("/insert")
+    @ResponseBody
+    public int insertMovie(@RequestBody Top top){
+        System.out.println(top);
+        int rt = topDao.insert(top);
         return rt;
     }
 

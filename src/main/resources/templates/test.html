@@ -11,8 +11,10 @@
     -->
 </head>
 <body>
-<button onclick="chuan()">点我</button>
+<button onclick="chuan()">更新</button>
+<button onclick="insert()">插入</button>
 <button onclick="login()">登录</button>
+<img src="https://img2.doubanio.com/view/photo/s_ratio_poster/public/p480747492.jpg"/>
 <script src="jquery-3.5.1.min.js"></script>
 <script>
     var movie =
@@ -21,6 +23,18 @@
                 "id": 1,
                 "movieName": "程宏豪",
                 "movieOthername": "  The Shawshank Redemption",
+                "movieIntro": "导演: 弗兰克·德拉邦特 Frank Darabont   主演: 蒂姆·罗宾斯 Tim  ",
+                "movieType": "1994   美国   犯罪 剧情",
+                "movieGrade": "9.7",
+                "movieGradenum": "2180339",
+                "movieEvaluate": "希望让人自由"
+            }
+        };
+    var movie1 =
+        {
+            "data": {
+                "id": null,
+                "movieName": "秦正君",
                 "movieIntro": "导演: 弗兰克·德拉邦特 Frank Darabont   主演: 蒂姆·罗宾斯 Tim  ",
                 "movieType": "1994   美国   犯罪 剧情",
                 "movieGrade": "9.7",
@@ -65,6 +79,25 @@
                 console.log(data);
             }
         });*/
+    }
+    function insert() {
+        const url = "http://localhost:9999/movie/insert";
+        return fetch(url, {
+            method: "POST",
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(movie1.data),
+        }).then((res) => {
+            if (res.ok) {
+                alert('保存成功');
+                return res;
+            } else {
+                alert('保存失败');
+                return '后端错误';
+            }
+        });
     }
     function login() {
         const url = "http://localhost:9999/user/login";
